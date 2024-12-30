@@ -11,6 +11,8 @@ app.use(cors("*"));
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
 
+await connectDB();
+
 app.use(express.json());
 
 app.use('/auth', authRoutes);
@@ -21,6 +23,5 @@ app.get('/', (req, res)=>{
 });
 
 app.listen(5000, async ()=>{
-    await connectDB();
     console.log("Listening on PORT 5000");
 });
