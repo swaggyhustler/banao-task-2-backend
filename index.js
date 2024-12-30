@@ -9,7 +9,9 @@ import cors from 'cors';
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173/"
+    origin: "*",
+    credentials: true,
+    methods: ['GET', 'PUT', 'PATCH', 'DELETE']
 }));
 
 app.use(express.urlencoded({ extended: true }));
