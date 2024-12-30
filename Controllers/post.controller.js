@@ -53,4 +53,42 @@ const deletePost = async (req, res) => {
 
 }
 
-export {createPost, updatePost, deletePost, getPosts};
+const likePost = async (req, res) =>{
+    const {id} = req.params;
+    try{
+        const result = await Post.findById(id);
+        result.likes++;
+        await result.save();
+        return res.status(200).json({message: 'Liked the post', success: true});
+    }catch(error){
+        return res.status(500).json({message: 'Cannot like post', success: false});
+    }
+}
+
+const unlike = async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        const result = await Post.findById(id);
+        result.likes--;
+        await result.save();
+        res.status(200).json({message: 'Unliked post', success: true});
+    }catch(error){
+        res.status(500).json({message: 'Cannot unlike post', success: false});
+    }
+}
+
+const comment = async (req, res) => {
+    const {id, comment} = req.body;
+
+    try{
+        const result = await Post.findById(id);
+        result.comments.push(comment);
+        await result.save();
+        return res.status(200).json({message: 'Commented on post', success: true});
+    }catch(error){
+        return res.status(500).json({message: 'Cannot comment on post', success: false});
+    }
+}
+
+export {createPost, updatePost, deletePost, getPosts, likePost, comment, unlike};

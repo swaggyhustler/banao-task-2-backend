@@ -16,6 +16,13 @@ const PostSchema = mongoose.Schema({
     },
     'banner': {
         type: String
+    },
+    'likes': {
+        type: Number,
+        default: 0
+    }, 
+    'comments': {
+        type: Array
     }
 },{timestamps: true});
 
