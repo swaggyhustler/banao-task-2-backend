@@ -16,6 +16,10 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
 
+app.get('/', (req, res)=>{
+    res.send("<h1>Banao Task 2, Backend</h1>");
+});
+
 app.listen(5000, async ()=>{
     await connectDB();
     console.log("Listening on PORT 5000");
